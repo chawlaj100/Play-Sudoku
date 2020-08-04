@@ -1,7 +1,6 @@
 from sudoku_utils import *
 def grid_values(grid):
-    """Convert grid string into {<box>: <value>} dict with '.' value for empties.
-
+    """
     Args:
         grid: Sudoku grid in string form, 81 characters long
     Returns:
@@ -17,30 +16,9 @@ def grid_values(grid):
         dict1[list1[i]] = grid[i]
     return dict1
 
-# def updated_grid_values(grid):
-#     """Convert grid string into {<box>: <value>} dict with '123456789' value for empties.
-
-#     Args:
-#         grid: Sudoku grid in string form, 81 characters long
-#     Returns:
-#         Sudoku grid in dictionary form:
-#         - keys: Box labels, e.g. 'A1'
-#         - values: Value in corresponding box, e.g. '8', or '123456789' if it is empty.
-#     """
-#     rows = 'ABCDEFGHI'
-#     cols = '123456789'
-#     dict = {}
-#     for i in range(len(grid)):
-#         if(grid[i]=='.'):
-#             dict[boxes[i]] = cols
-#         else:
-#             dict[boxes[i]] = grid[i]
-#     return dict
-
 def eliminate(values):
-    """Eliminate values from peers of each box with a single value.
-
-    Go through all the boxes, and whenever there is a box with a single value,
+    """
+    We go through all the boxes, and whenever there is a box with a single value, we 
     eliminate this value from the set of values of all its peers.
 
     Args:
@@ -115,15 +93,13 @@ def eliminate(values):
     return values
 
 def only_choice(values):
-    """Finalize all values that are the only choice for a unit.
-
-    Go through all the units, and whenever there is a unit with a value
-    that only fits in one box, assign the value to this box.
+    """
+    We go through all the units, and whenever there is a unit with a value
+    that only fits in one box, we assign the value to this box.
 
     Input: Sudoku in dictionary form.
     Output: Resulting Sudoku in dictionary form after filling in only choices.
     """
-    # TODO: Implement only choice strategy here
     #units = [cross(abc,xyz) for abc in ('ABC', 'DEF', 'GHI') for xyz in ('123','456','789')]
     for i in unitlist:
         subset = i
@@ -150,8 +126,7 @@ def only_choice(values):
     return values
 
 def naked_twins(values):
-    """Eliminate values using the naked twins strategy.
-
+    """
     The naked twins strategy says that if you have two or more unallocated boxes
     in a unit and there are only two digits that can go in those two boxes, then
     those two digits can be eliminated from the possible assignments of all other
@@ -162,8 +137,7 @@ def naked_twins(values):
     values(dict)
         a dictionary of the form {'box_name': '123456789', ...}
 
-    Returns
-    -------
+    Returns:
     dict
         The values dictionary with the naked twins eliminated from peers
     """
@@ -225,7 +199,7 @@ def reduce_puzzle(values):
             return False
     return values
 
-def search(values): # When sudoku is hard and it doesn't change the values when we use reduce_puzzle even after many iterations
+def search(values): # When sudoku is hard and it doesn't change the values when we use reduce_puzzle.
     "Using depth-first search and propagation, create a search tree and solve the sudoku."
     # First, reduce the puzzle using the previous function
     values = reduce_puzzle(values)
