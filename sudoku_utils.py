@@ -10,7 +10,7 @@ boxes = cross(rows, cols)
 row_units = [cross(r, cols) for r in rows]
 column_units = [cross(rows, c) for c in cols]
 square_units = [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')]
-# You can add the diagonal units to unit list but uncomment the below written code and then add diagonals to unit-list
+# We can add the diagonal units to unit list but uncomment the below written code and then add diagonals to unitlist
 # diagonals=[]
 # list1=[]
 # list2=[]
@@ -47,8 +47,7 @@ def display(values):
 
 
 def updated_grid_values(grid):
-    """Convert grid string into {<box>: <value>} dict with '123456789' value for empties.
-
+    """
     Args:
         grid: Sudoku grid in string form, 81 characters long
     Returns:
